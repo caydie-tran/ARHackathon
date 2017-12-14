@@ -1,6 +1,6 @@
 # ARHackathon
 
-<<<<<<< HEAD
+
 ##Ideas:
 
 1. Shape-shifting animals/Teen Titans/Harry Potter boggart
@@ -64,9 +64,4 @@
     Displaying win screen
 
     Displaying start page again
-=======
-Ideas:<br>
-1) Shape-shifting animals/Teen Titans<br>
-2) Build a snowman<br>
-3) Slenderman<br>
->>>>>>> f29f8550d3e61dae3bed4e31c9725eb1b0d6080c
+
