@@ -29,8 +29,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         sceneView.scene = scene
+        self.addSlenderMan();
         
-        _ = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.addSlenderMan), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.addSlenderMan), userInfo: nil, repeats: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,9 +60,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func addSlenderMan() {
         guard isGameInPlay else { return }
-        let randomX = arc4random();
-        let randomY = arc4random();
-        let randomZ = arc4random();
+        let randomX = CGFloat(Float(arc4random()) / Float(UINT32_MAX))
+        let randomY = CGFloat(Float(arc4random()) / Float(UINT32_MAX))
+        let randomZ = CGFloat(Float(arc4random()) / Float(UINT32_MAX))
 
         let slenderMan = SCNScene(named: "art.scnassets/slender.dae")
         
@@ -71,9 +72,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             slenderManNode.addChildNode(child)
         }
     
-        slenderManNode.position = SCNVector3(0, -1, -2)
+        slenderManNode.position = SCNVector3(randomX * 10, randomY * 5, randomZ)
         
         sceneView.scene.rootNode.addChildNode(slenderManNode)
+        _ = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(self.removeSlenderMan), userInfo: nil, repeats: true)
+    }
+    
+    @objc func removeSlenderMan() {
+        guard isGameInPlay else { return }
+        sceneView.scene.rootNode.removeAllActions()
+        
+        for child in (sceneView.scene.rootNode.childNodes) {
+            child.removeFromParentNode()
+        }
     }
 
     // MARK: - ARSCNViewDelegate
