@@ -24,10 +24,13 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/slender.dae")!
+        let scene = SCNScene()
+//        let scene = SCNScene(named: "art.scnassets/slender.dae")!
         
         // Set the scene to the view
         sceneView.scene = scene
+        
+        _ = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.addSlenderMan), userInfo: nil, repeats: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,6 +53,27 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
+    }
+    
+    var isGameInPlay = true
+    
+    @objc func addSlenderMan() {
+        guard isGameInPlay else { return }
+        let randomX = arc4random();
+        let randomY = arc4random();
+        let randomZ = arc4random();
+
+        let slenderMan = SCNScene(named: "art.scnassets/slender.dae")
+        
+        let slenderManNode = SCNNode()
+        
+        for child in (slenderMan?.rootNode.childNodes)! {
+            slenderManNode.addChildNode(child)
+        }
+    
+        slenderManNode.position = SCNVector3(0, -1, -2)
+        
+        sceneView.scene.rootNode.addChildNode(slenderManNode)
     }
 
     // MARK: - ARSCNViewDelegate
