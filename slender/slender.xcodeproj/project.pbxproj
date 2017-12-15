@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02832F5A1FE45F2200FE3F27 /* SlenderManTrim.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 02832F591FE45F2100FE3F27 /* SlenderManTrim.mp3 */; };
 		AD9F10061FE348ED009AF718 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9F10051FE348ED009AF718 /* AppDelegate.swift */; };
 		AD9F10081FE348ED009AF718 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = AD9F10071FE348ED009AF718 /* art.scnassets */; };
 		AD9F100A1FE348ED009AF718 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD9F10091FE348ED009AF718 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		02832F591FE45F2100FE3F27 /* SlenderManTrim.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = SlenderManTrim.mp3; path = ../../../../Downloads/SlenderManTrim.mp3; sourceTree = "<group>"; };
 		AD9F10021FE348ED009AF718 /* slender.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slender.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD9F10051FE348ED009AF718 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AD9F10071FE348ED009AF718 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 		AD9F10041FE348ED009AF718 /* slender */ = {
 			isa = PBXGroup;
 			children = (
+				02832F591FE45F2100FE3F27 /* SlenderManTrim.mp3 */,
 				AD9F10051FE348ED009AF718 /* AppDelegate.swift */,
 				AD9F10071FE348ED009AF718 /* art.scnassets */,
 				AD9F10091FE348ED009AF718 /* ViewController.swift */,
@@ -128,6 +131,7 @@
 			files = (
 				AD9F10081FE348ED009AF718 /* art.scnassets in Resources */,
 				AD9F10121FE348ED009AF718 /* LaunchScreen.storyboard in Resources */,
+				02832F5A1FE45F2200FE3F27 /* SlenderManTrim.mp3 in Resources */,
 				AD9F100F1FE348ED009AF718 /* Assets.xcassets in Resources */,
 				AD9F100D1FE348ED009AF718 /* Main.storyboard in Resources */,
 			);
