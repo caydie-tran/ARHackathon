@@ -32,6 +32,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         self.addSlenderMan();
         
         _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.addSlenderMan), userInfo: nil, repeats: true)
+        
+        let startText = SCNText(string: "Tap on Slenderman\nBy SSED", extrusionDepth: 1)
+        let textNode = SCNNode(geometry: startText)
+        textNode.scale = SCNVector3Make( 1, 1, 1)
+        textNode.geometry = startText
+        textNode.position = SCNVector3Make(-50, 0, -50)
+        self.gameInstNode = textNode
+        
+        sceneView.scene.rootNode.addChildNode(textNode)
+        
+        Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(self.removeGameInst), userInfo: nil, repeats: false)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,6 +69,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     var isGameInPlay = true
+    var slenderManNode: SCNNode!
+    var gameInstNode: SCNNode!
+
     
     @objc func addSlenderMan() {
         guard isGameInPlay else { return }
@@ -65,8 +80,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let randomZ = CGFloat(Float(arc4random()) / Float(UINT32_MAX))
 
         let slenderMan = SCNScene(named: "art.scnassets/slender.dae")
-        
+
         let slenderManNode = SCNNode()
+        self.slenderManNode = slenderManNode
         
         for child in (slenderMan?.rootNode.childNodes)! {
             slenderManNode.addChildNode(child)
@@ -76,15 +92,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.scene.rootNode.addChildNode(slenderManNode)
         _ = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(self.removeSlenderMan), userInfo: nil, repeats: true)
+        
     }
     
     @objc func removeSlenderMan() {
         guard isGameInPlay else { return }
         sceneView.scene.rootNode.removeAllActions()
-        
-        for child in (sceneView.scene.rootNode.childNodes) {
-            child.removeFromParentNode()
-        }
+        slenderManNode.removeFromParentNode()
+    }
+    
+    @objc func removeGameInst() {
+        gameInstNode.removeFromParentNode()
     }
 
     // MARK: - ARSCNViewDelegate
