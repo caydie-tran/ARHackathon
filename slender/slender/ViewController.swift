@@ -136,7 +136,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         guard isGameInPlay else { return }
         
         do {
-            let audioPath = Bundle.main.path(forResource: "SlenderManTrim", ofType: "mp3")
+            let audioPath = Bundle.main.path(forResource: "art.scnassets/SlenderManTrim", ofType: "mp3")
             try player = AVAudioPlayer(contentsOf: NSURL(fileURLWithPath: audioPath!) as URL)
         } catch {
             // Error
