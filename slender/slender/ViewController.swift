@@ -9,10 +9,12 @@
 import UIKit
 import SceneKit
 import ARKit
+import AVFoundation
 
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
+    var player: AVAudioPlayer = AVAudioPlayer()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +45,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene.rootNode.addChildNode(textNode)
         
         Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(self.removeGameInst), userInfo: nil, repeats: false)
+        setupSound();
 
     }
     
@@ -111,7 +114,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.scene.rootNode.addChildNode(slenderManNode)
         
         _ = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.removeSlenderMan), userInfo: nil, repeats: false)
-
+        player.play()
     }
     
     @objc func removeSlenderMan() {
@@ -120,12 +123,24 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         for child in (sceneView.scene.rootNode.childNodes) {
             child.removeFromParentNode()
         }
+        player.stop()
     }
     
     @objc func removeGameInst() {
         gameInstNode.removeFromParentNode()
         
         _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.addSlenderMan), userInfo: nil, repeats: true)
+    }
+    
+    @objc func setupSound() {
+        guard isGameInPlay else { return }
+        
+        do {
+            let audioPath = Bundle.main.path(forResource: "art.scnassets/SlenderManTrim", ofType: "mp3")
+            try player = AVAudioPlayer(contentsOf: NSURL(fileURLWithPath: audioPath!) as URL)
+        } catch {
+            // Error
+        }
     }
 
     // MARK: - ARSCNViewDelegate
