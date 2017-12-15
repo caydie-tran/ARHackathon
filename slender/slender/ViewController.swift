@@ -15,6 +15,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     var player: AVAudioPlayer = AVAudioPlayer()
+    var count = 0
+    var isGameInPlay = true
+    var slenderManNode: SCNNode!
+    var gameInstNode: SCNNode!
+    var counterTextNode: SCNNode!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +37,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Set the scene to the view
         sceneView.scene = scene
         //self.addSlenderMan();
+         addTapGestureToSceneView()
         
 //        _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.addSlenderMan), userInfo: nil, repeats: true)
         
@@ -42,9 +48,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         textNode.position = SCNVector3Make(-50, 0, -50)
         self.gameInstNode = textNode
         
-        sceneView.scene.rootNode.addChildNode(textNode)
+        sceneView.scene.rootNode.addChildNode(gameInstNode)
         
-        Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(self.removeGameInst), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.removeGameInst), userInfo: nil, repeats: false)
         setupSound();
 
     }
@@ -70,10 +76,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         super.didReceiveMemoryWarning()
         // Release any cached data, images, etc that aren't in use.
     }
-    
-    var isGameInPlay = true
-    var slenderManNode: SCNNode!
-    var gameInstNode: SCNNode!
 
     
     @objc func addSlenderMan() {
@@ -121,9 +123,10 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @objc func removeSlenderMan() {
         guard isGameInPlay else { return }
         
-        for child in (sceneView.scene.rootNode.childNodes) {
-            child.removeFromParentNode()
-        }
+//        for child in (sceneView.scene.rootNode.childNodes) {
+//            child.removeFromParentNode()
+//        }
+        slenderManNode.removeFromParentNode()
         player.stop()
     }
     
@@ -131,6 +134,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         gameInstNode.removeFromParentNode()
         
         _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.addSlenderMan), userInfo: nil, repeats: true)
+        
+        // Node for counter
+        let counterText = SCNText(string: String(format: "%d", count), extrusionDepth: 1)
+        counterTextNode = SCNNode(geometry: counterText)
+        counterTextNode.scale = SCNVector3Make( 1, 1, 1)
+        counterTextNode.geometry = counterText
+        counterTextNode.position = SCNVector3Make(-50, 0, -50)
+        
+        sceneView.scene.rootNode.addChildNode(counterTextNode)
     }
     
     @objc func setupSound() {
@@ -168,5 +180,34 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
+    }
+    
+    func addTapGestureToSceneView() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ViewController.didTap(withGestureRecognizer:)))
+        sceneView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func didTap(withGestureRecognizer recognizer: UIGestureRecognizer) {
+        let tapLocation = recognizer.location(in: sceneView)
+        let hitTestResults = sceneView.hitTest(tapLocation)
+        if (hitTestResults.first != nil) {
+            incrementCount()
+        } else {
+            return
+        }
+    }
+    
+    func incrementCount() {
+        count = count + 1
+        print(count)
+        counterTextNode!.removeFromParentNode()
+        
+        let counterText = SCNText(string: String(format: "%d", count), extrusionDepth: 1)
+        counterTextNode = SCNNode(geometry: counterText)
+        counterTextNode.scale = SCNVector3Make( 1, 1, 1)
+        counterTextNode.geometry = counterText
+        counterTextNode.position = SCNVector3Make(-50, 0, -50)
+        
+        sceneView.scene.rootNode.addChildNode(counterTextNode)
     }
 }
