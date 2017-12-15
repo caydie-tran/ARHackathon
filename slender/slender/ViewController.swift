@@ -116,7 +116,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         slenderManNode.position = SCNVector3(randomX, randomY, randomZ)
         sceneView.scene.rootNode.addChildNode(slenderManNode)
         
-        _ = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.removeSlenderMan), userInfo: nil, repeats: false)
+        _ = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(self.removeSlenderMan), userInfo: nil, repeats: false)
         player.play()
     }
     
