@@ -16,8 +16,6 @@
 ## Flow
 1. Starting the game (start screen showing character model w/instructions) 
 
-   
-
     Start button
 
 2. Random spawning (after game starts)
