@@ -117,8 +117,6 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func removeSlenderMan() {
         guard isGameInPlay else { return }
-//        sceneView.scene.rootNode.removeAllActions()
-//        slenderManNode.removeFromParentNode()
         
         for child in (sceneView.scene.rootNode.childNodes) {
             child.removeFromParentNode()
