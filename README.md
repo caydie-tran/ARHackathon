@@ -1,12 +1,12 @@
 # ARHackathon
 
-##Ideas:
+## Ideas:
 
 1. Shape-shifting animals/Teen Titans/Harry Potter boggart
 2. Find Slenderman (randomly spawns), menus
 3. Landscaping
 
-##Overview
+## Overview
 1. Select a scary object
 2. Walk around
 3. Your selected object will pop up on your screen at a random time
