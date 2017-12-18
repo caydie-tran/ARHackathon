@@ -7,8 +7,8 @@
 3. Landscaping
 
 ## Overview
-1. Select a scary object
-2. Walk around
+1. Select a scary object (default Slenderman)
+2. Walk around your space
 3. Your selected object will pop up on your screen at a random time
 4. You have 1 second to look away from it before you DIE
 5. Survive the 30 seconds to win the game
@@ -18,15 +18,13 @@
 
     Start button
 
-2. Random spawning (after game starts)
+2. Game begins (random spawning)
 
-    Spawn on origin
-
-    Spawn random times 3 times within 10 sec - 30 sec
+    Spawn scary object on origin randomly 3 times within 10 sec - 30 sec
 
     Player has 1 second to look away each time
 
-    You lose screen pops up if reflex not fast enough (you died at ? sec)
+    "You Lose" screen pops up if you don't look away fast enough (Display You Died at {} Sec)
 
 3. Game ends at 30 sec
 
@@ -61,3 +59,10 @@
     Displaying win screen
 
     Displaying start page again
+
+
+## Add-Ons (Post-MVP)
+1. Menu can switch between different models
+2. Sound effects
+3. Set game length
+
