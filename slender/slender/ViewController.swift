@@ -75,9 +75,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func addSlenderMan() {
         guard isGameInPlay else { return }
-        let randomX = CGFloat(Float(arc4random()) / Float(UINT32_MAX))
-        let randomY = CGFloat(Float(arc4random()) / Float(UINT32_MAX))
-        let randomZ = CGFloat(Float(arc4random()) / Float(UINT32_MAX))
+    
+        var randomX = CGFloat(arc4random_uniform(21) + 0)
+        if (Float(arc4random()) /  Float(UInt32.max) < 0.5) {
+            randomX = randomX * -1
+        }
+        
+        var randomY = CGFloat(arc4random_uniform(15) + 0)
+        if (Float(arc4random()) /  Float(UInt32.max) < 0.5) {
+            randomY = randomY * -1
+        }
+        
+        var randomZ = CGFloat(arc4random_uniform(15) + 0)
+        if (Float(arc4random()) /  Float(UInt32.max) < 0.5) {
+            randomZ = randomZ * -1
+        }
 
         let slenderMan = SCNScene(named: "art.scnassets/slender.dae")
 
@@ -87,9 +99,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         for child in (slenderMan?.rootNode.childNodes)! {
             slenderManNode.addChildNode(child)
         }
-    
-        slenderManNode.position = SCNVector3(randomX * 10, randomY * 5, randomZ)
         
+        print("x")
+        print(randomX)
+        print("y")
+        print(randomY)
+        print("z")
+        print(randomZ)
+        
+        slenderManNode.position = SCNVector3(randomX, randomY, randomZ)
         sceneView.scene.rootNode.addChildNode(slenderManNode)
         _ = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(self.removeSlenderMan), userInfo: nil, repeats: true)
         
