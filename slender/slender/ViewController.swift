@@ -76,20 +76,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @objc func addSlenderMan() {
         guard isGameInPlay else { return }
     
-        var randomX = CGFloat(arc4random_uniform(21) + 0)
+        var randomX = CGFloat(arc4random_uniform(16) + 0)
         if (Float(arc4random()) /  Float(UInt32.max) < 0.5) {
             randomX = randomX * -1
         }
         
-        var randomY = CGFloat(arc4random_uniform(15) + 0)
+        var randomY = CGFloat(arc4random_uniform(12) + 0)
         if (Float(arc4random()) /  Float(UInt32.max) < 0.5) {
             randomY = randomY * -1
         }
         
-        var randomZ = CGFloat(arc4random_uniform(15) + 0)
+        var randomZ = CGFloat(arc4random_uniform(12) + 0)
         if (Float(arc4random()) /  Float(UInt32.max) < 0.5) {
             randomZ = randomZ * -1
         }
+        
+    
+        print (randomX)
+    
+        print (randomY)
+    
+        print (randomZ)
+        
 
         let slenderMan = SCNScene(named: "art.scnassets/slender.dae")
 
@@ -100,23 +108,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             slenderManNode.addChildNode(child)
         }
         
-        print("x")
-        print(randomX)
-        print("y")
-        print(randomY)
-        print("z")
-        print(randomZ)
-        
         slenderManNode.position = SCNVector3(randomX, randomY, randomZ)
         sceneView.scene.rootNode.addChildNode(slenderManNode)
-        _ = Timer.scheduledTimer(timeInterval: 8, target: self, selector: #selector(self.removeSlenderMan), userInfo: nil, repeats: true)
         
+        _ = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.removeSlenderMan), userInfo: nil, repeats: false)
+
     }
     
     @objc func removeSlenderMan() {
         guard isGameInPlay else { return }
-        sceneView.scene.rootNode.removeAllActions()
-        slenderManNode.removeFromParentNode()
+//        sceneView.scene.rootNode.removeAllActions()
+//        slenderManNode.removeFromParentNode()
+        
+        for child in (sceneView.scene.rootNode.childNodes) {
+            child.removeFromParentNode()
+        }
     }
     
     @objc func removeGameInst() {
