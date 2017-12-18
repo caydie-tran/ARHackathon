@@ -29,9 +29,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Set the scene to the view
         sceneView.scene = scene
-        self.addSlenderMan();
+        //self.addSlenderMan();
         
-        _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.addSlenderMan), userInfo: nil, repeats: true)
+//        _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.addSlenderMan), userInfo: nil, repeats: true)
         
         let startText = SCNText(string: "Tap on Slenderman\nBy SSED", extrusionDepth: 1)
         let textNode = SCNNode(geometry: startText)
@@ -103,6 +103,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     @objc func removeGameInst() {
         gameInstNode.removeFromParentNode()
+        
+        _ = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.addSlenderMan), userInfo: nil, repeats: true)
     }
 
     // MARK: - ARSCNViewDelegate
